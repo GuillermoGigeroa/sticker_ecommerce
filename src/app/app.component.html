@@ -11,29 +11,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Link activado</a>
-                    </li> -->
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Categorías
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Categoría 1</a></li>
-                            <li><a class="dropdown-item" href="#">Categoría 2</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Otro</a></li>
-                        </ul>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link disabled">Link desactivado</a>
-                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['']" routerLinkActive="active">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/camera-frame']" routerLinkActive="active">🖼️ Cuadro Vivo</a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
@@ -44,17 +27,4 @@
     </nav>
 </div>
 <div class="header-bottom"></div>
-<div class="main">
-    @for (item of items; track item.image) {
-        <div class="card">
-            <img [src]="item.image" [alt]="item.text" class="card-img-top">
-            <div class="card-body">
-                <p class="card-text">{{item.text}}</p>
-            </div>
-        </div>
-    } @empty {
-        <div class="card">
-            <p class="card-text">No hay items para mostrar.</p>
-        </div>
-    }
-</div>
+<router-outlet></router-outlet>

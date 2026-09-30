@@ -7,16 +7,20 @@ import { NavigationService } from './shared/services/navigation.service';
 import { UtilsService } from './shared/services/utils.service';
 import { DataService } from './shared/services/data.service';
 import { FormsModule } from '@angular/forms';
+import { CameraFrameModule } from './camera-frame/camera-frame.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     FormsModule,
+    CameraFrameModule,
   ],
   providers: [
     DataService,

@@ -1,0 +1,19 @@
+<div class="modal-backdrop" [class.open]="isOpen" (click)="onBackdropClick($event)" [attr.aria-hidden]="!isOpen">
+  <div class="modal-card" *ngIf="isOpen">
+    <div class="modal-header">
+      <h3>¡Foto Capturada! 📸</h3>
+      <button class="btn-close" (click)="onClose()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="preview-container">
+        <img [src]="photoDataUrl" alt="Foto capturada con marco decorativo" *ngIf="photoDataUrl">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="onClose()">Tomar Otra</button>
+      <a class="btn btn-primary" [href]="photoDataUrl" download="cuadro-vivo.png" (click)="onDownload()">
+        💾 Descargar Foto
+      </a>
+    </div>
+  </div>
+</div>

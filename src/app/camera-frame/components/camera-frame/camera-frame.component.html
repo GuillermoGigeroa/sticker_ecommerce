@@ -1,0 +1,126 @@
+<div class="app-container">
+  <!-- Encabezado -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo-area">
+        <span class="logo-icon">🖼️</span>
+        <div>
+          <h1>Cuadro Vivo</h1>
+          <p>Espejo interactivo y cabina de fotos con marcos decorativos</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-pulse">● En Vivo</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="main-layout">
+    <!-- Sección del Marco y Cámara -->
+    <section class="stage-section">
+      <div class="frame-container" [ngClass]="getFrameClass()">
+        
+        <!-- Elementos decorativos según marco -->
+        <div class="frame-ornament corner-top-left"></div>
+        <div class="frame-ornament corner-top-right"></div>
+        <div class="frame-ornament corner-bottom-left"></div>
+        <div class="frame-ornament corner-bottom-right"></div>
+
+        <!-- Ventana de Visualización de Cámara -->
+        <div class="view-wrapper">
+          <video 
+            #videoElement 
+            autoplay 
+            playsinline 
+            muted
+            [ngClass]="getMirrorClass() + ' ' + getFilterClass()"
+          ></video>
+          
+          <!-- Overlay cuando la cámara está apagada -->
+          <div class="camera-offline" *ngIf="!isCameraOn">
+            <div class="offline-content">
+              <div class="offline-icon">📷</div>
+              <h3>Cámara desactivada</h3>
+              <p>Haz clic para activar tu cámara web y verte en el cuadro.</p>
+              <button class="btn btn-primary" (click)="onActivateCamera()">
+                Activar Cámara
+              </button>
+            </div>
+          </div>
+
+          <!-- Efecto de Flash al tomar foto -->
+          <div class="flash-overlay" [class.flash-active]="isFlashActive"></div>
+
+          <!-- Cuenta regresiva (3, 2, 1) -->
+          <div class="countdown-overlay" [class.active]="isCountingDown">
+            <span>{{ countdown }}</span>
+          </div>
+        </div>
+
+        <!-- Pie del Marco (Polaroid / Placa Dorada / Detalles) -->
+        <div class="frame-footer">
+          <div class="polaroid-caption-box" *ngIf="showPolaroidFooter()">
+            <input 
+              type="text" 
+              [(ngModel)]="polaroidCaption" 
+              maxlength="40" 
+              placeholder="Escribe un pie de foto..."
+              class="polaroid-caption"
+            >
+            <span class="caption-date">{{ captionDate }}</span>
+          </div>
+          <div class="gold-plaque" *ngIf="showGoldFooter()">
+            <div class="plaque-inner">
+              <span class="plaque-title">RETRATO VIVO</span>
+              <span class="plaque-subtitle">Colección Privada • Óleo Digital</span>
+            </div>
+          </div>
+          <div class="neon-tag" *ngIf="showNeonFooter()">
+            <span>LIVE FEED // 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de acción rápida debajo del cuadro -->
+      <div class="quick-actions">
+        <button class="btn btn-capture" (click)="onCapture()" title="Tomar foto con el marco">
+          <span class="capture-icon">📸</span>
+          <span class="capture-text">Tomar Foto</span>
+        </button>
+        
+        <div class="timer-toggle">
+          <label class="switch-label">
+            <input type="checkbox" [(ngModel)]="useTimer">
+            <span class="slider"></span>
+            <span class="label-text">Temporizador 3s</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel de Controles y Personalización -->
+    <aside class="control-panel">
+      <app-camera-controls></app-camera-controls>
+      <app-frame-selector></app-frame-selector>
+      <app-filter-selector></app-filter-selector>
+      
+      <!-- Instrucciones y Funcionalidad -->
+      <div class="control-card help-card">
+        <h2 class="card-title">💡 ¿Qué puedes hacer?</h2>
+        <ul class="help-list">
+          <li><strong>Mírate en vivo:</strong> Úsalo como espejo decorativo mientras trabajas o te preparas.</li>
+          <li><strong>Personaliza el texto:</strong> En el marco Polaroid, puedes escribir la frase o dedicatoria que quieras.</li>
+          <li><strong>Descarga tu retrato:</strong> Al pulsar "Tomar Foto", se genera una imagen completa con marco, decoración y filtro lista para guardar en PNG.</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Modal de Resultado / Foto Capturada -->
+  <app-photo-modal 
+    [isOpen]="showPhotoModal" 
+    [photoDataUrl]="capturedPhotoUrl"
+    (close)="closePhotoModal()">
+  </app-photo-modal>
+</div>

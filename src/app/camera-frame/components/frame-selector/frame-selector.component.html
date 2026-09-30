@@ -1,0 +1,14 @@
+<div class="control-card">
+  <h2 class="card-title">🎨 Marco Decorativo</h2>
+  <div class="frame-selector-grid">
+    <button 
+      *ngFor="let frame of frames"
+      class="frame-chip"
+      [class.active]="isSelected(frame.type)"
+      (click)="selectFrame(frame.type)"
+    >
+      <span class="chip-emoji">{{ frame.emoji }}</span>
+      <span class="chip-name">{{ frame.name }}</span>
+    </button>
+  </div>
+</div>

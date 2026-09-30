@@ -1,0 +1,13 @@
+<div class="control-card">
+  <h2 class="card-title">✨ Filtro de Imagen</h2>
+  <div class="filters-grid">
+    <button 
+      *ngFor="let filter of filters"
+      class="filter-chip"
+      [class.active]="isSelected(filter.type)"
+      (click)="selectFilter(filter.type)"
+    >
+      {{ filter.name }}
+    </button>
+  </div>
+</div>

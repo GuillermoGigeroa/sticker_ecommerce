@@ -1,0 +1,14 @@
+<div class="main">
+    @for (item of items; track item.image) {
+        <div class="card">
+            <img [src]="item.image" [alt]="item.text" class="card-img-top">
+            <div class="card-body">
+                <p class="card-text">{{item.text}}</p>
+            </div>
+        </div>
+    } @empty {
+        <div class="card">
+            <p class="card-text">No hay items para mostrar.</p>
+        </div>
+    }
+</div>

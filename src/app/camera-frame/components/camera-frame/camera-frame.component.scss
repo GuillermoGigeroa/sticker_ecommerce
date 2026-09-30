@@ -23,19 +23,16 @@
   padding: 0;
 }
 
-body {
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 20px;
   font-family: var(--font-sans);
   background-color: var(--bg-main);
   color: var(--text-primary);
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-}
-
-.app-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 24px 20px;
 }
 
 /* --- Encabezado --- */
@@ -68,11 +65,13 @@ body {
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .logo-area p {
   color: var(--text-secondary);
   font-size: 14px;
+  margin: 0;
 }
 
 .badge {
@@ -136,7 +135,7 @@ body {
   background: #000;
 }
 
-#webcam {
+video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -159,7 +158,6 @@ body {
   text-align: center;
   padding: 24px;
   z-index: 5;
-  transition: opacity 0.3s ease;
 }
 
 .offline-content {
@@ -175,6 +173,7 @@ body {
 .offline-content h3 {
   font-size: 18px;
   margin-bottom: 8px;
+  color: var(--text-primary);
 }
 
 .offline-content p {
@@ -211,18 +210,18 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 15;
-}
 
-.countdown-overlay.active {
-  display: flex;
-}
+  &.active {
+    display: flex;
+  }
 
-#countdownNumber {
-  font-size: 96px;
-  font-weight: 800;
-  color: #fff;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.8);
-  animation: countPulse 0.9s infinite;
+  span {
+    font-size: 96px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    animation: countPulse 0.9s infinite;
+  }
 }
 
 @keyframes countPulse {
@@ -242,17 +241,17 @@ body {
   border-radius: 4px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 3px 10px rgba(0,0,0,0.2);
   border: 1px solid rgba(0,0,0,0.06);
-}
 
-.frame-polaroid .view-wrapper {
-  border-radius: 2px;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
-}
+  .view-wrapper {
+    border-radius: 2px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+  }
 
-.frame-polaroid .frame-footer {
-  display: block;
-  padding-top: 14px;
-  text-align: center;
+  .frame-footer {
+    display: block;
+    padding-top: 14px;
+    text-align: center;
+  }
 }
 
 .polaroid-caption-box {
@@ -262,7 +261,7 @@ body {
   gap: 4px;
 }
 
-#polaroidCaption {
+.polaroid-caption {
   font-family: var(--font-hand);
   font-size: 26px;
   color: #2b2b2b;
@@ -273,10 +272,10 @@ body {
   width: 90%;
   outline: none;
   transition: border-color 0.2s ease;
-}
 
-#polaroidCaption:focus, #polaroidCaption:hover {
-  border-bottom-color: #aaa;
+  &:focus, &:hover {
+    border-bottom-color: #aaa;
+  }
 }
 
 .caption-date {
@@ -295,31 +294,26 @@ body {
   border-radius: 6px;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), inset 0 0 12px rgba(0,0,0,0.6);
   border: 4px solid #5a3e10;
-}
 
-.frame-gold .view-wrapper {
-  border: 10px solid #f6f3eb; /* Paspartú crema */
-  box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.4);
-}
+  .view-wrapper {
+    border: 10px solid #f6f3eb;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.4);
+  }
 
-.frame-gold .frame-footer {
-  display: block;
-  padding-top: 16px;
-  display: flex;
-  justify-content: center;
+  .frame-footer {
+    display: block;
+    padding-top: 16px;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .gold-plaque {
-  display: none;
   background: linear-gradient(180deg, #f0d588 0%, #b88a28 100%);
   border: 1px solid #725114;
   padding: 4px 18px;
   border-radius: 3px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.6);
-}
-
-.frame-gold .gold-plaque {
-  display: block;
 }
 
 .plaque-inner {
@@ -351,51 +345,51 @@ body {
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(234, 179, 8, 0.15), 0 8px 25px rgba(0,0,0,0.4);
   border: 4px solid #fde047;
-}
 
-.frame-flowers .view-wrapper {
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
+  .view-wrapper {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
 
-.frame-flowers .corner-top-left::before {
-  content: '🌼';
-  position: absolute;
-  top: -12px;
-  left: -12px;
-  font-size: 34px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-  z-index: 10;
-}
+  .corner-top-left::before {
+    content: '🌼';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 34px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    z-index: 10;
+  }
 
-.frame-flowers .corner-top-right::before {
-  content: '🌸';
-  position: absolute;
-  top: -12px;
-  right: -12px;
-  font-size: 34px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-  z-index: 10;
-}
+  .corner-top-right::before {
+    content: '🌸';
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    font-size: 34px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    z-index: 10;
+  }
 
-.frame-flowers .corner-bottom-left::before {
-  content: '🌸';
-  position: absolute;
-  bottom: -12px;
-  left: -12px;
-  font-size: 34px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-  z-index: 10;
-}
+  .corner-bottom-left::before {
+    content: '🌸';
+    position: absolute;
+    bottom: -12px;
+    left: -12px;
+    font-size: 34px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    z-index: 10;
+  }
 
-.frame-flowers .corner-bottom-right::before {
-  content: '🌼';
-  position: absolute;
-  bottom: -12px;
-  right: -12px;
-  font-size: 34px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-  z-index: 10;
+  .corner-bottom-right::before {
+    content: '🌼';
+    position: absolute;
+    bottom: -12px;
+    right: -12px;
+    font-size: 34px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    z-index: 10;
+  }
 }
 
 /* 4. Marco Neón Cyber */
@@ -406,6 +400,16 @@ body {
   border: 2px solid #00f2fe;
   box-shadow: 0 0 20px rgba(0, 242, 254, 0.6), inset 0 0 15px rgba(79, 172, 254, 0.4), 0 10px 40px rgba(0,0,0,0.8);
   animation: neonGlow 3s infinite alternate;
+
+  .view-wrapper {
+    border-radius: 8px;
+  }
+
+  .frame-footer {
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+  }
 }
 
 @keyframes neonGlow {
@@ -413,27 +417,12 @@ body {
   100% { border-color: #f72585; box-shadow: 0 0 25px rgba(247, 37, 133, 0.8), inset 0 0 14px rgba(247, 37, 133, 0.5); }
 }
 
-.frame-neon .view-wrapper {
-  border-radius: 8px;
-}
-
-.frame-neon .frame-footer {
-  display: block;
-  text-align: center;
-  padding-top: 10px;
-}
-
 .neon-tag {
-  display: none;
   font-family: monospace;
   font-size: 11px;
   letter-spacing: 2px;
   color: #00f2fe;
   text-shadow: 0 0 8px #00f2fe;
-}
-
-.frame-neon .neon-tag {
-  display: block;
 }
 
 /* 5. Marco Madera Rústica */
@@ -443,12 +432,12 @@ body {
   border-radius: 10px;
   border: 3px solid #201107;
   box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.8);
-}
 
-.frame-wood .view-wrapper {
-  border: 4px solid #1a0d05;
-  border-radius: 4px;
-  box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
+  .view-wrapper {
+    border: 4px solid #1a0d05;
+    border-radius: 4px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
+  }
 }
 
 /* 6. Marco Cristal Moderno */
@@ -460,18 +449,12 @@ body {
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.25);
-}
 
-.frame-glass .view-wrapper {
-  border-radius: 14px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  .view-wrapper {
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
 }
-
-/* Control de visualización del footer del marco */
-.frame-polaroid #polaroidCaptionBox { display: flex; }
-.frame-container:not(.frame-polaroid) #polaroidCaptionBox { display: none; }
-.frame-container:not(.frame-gold) #goldPlaque { display: none; }
-.frame-container:not(.frame-neon) #neonTag { display: none; }
 
 /* =========================================
    FILTROS DE IMAGEN
@@ -505,50 +488,50 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
-}
 
-.btn-primary {
-  background: var(--accent-color);
-  color: white;
-  box-shadow: 0 4px 14px var(--accent-glow);
-}
+  &.btn-primary {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 14px var(--accent-glow);
 
-.btn-primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
-}
+    &:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+  }
 
-.btn-secondary {
-  background: var(--bg-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-}
+  &.btn-secondary {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
 
-.btn-secondary:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(255,255,255,0.2);
-}
+    &:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255,255,255,0.2);
+    }
+  }
 
-.btn-capture {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 14px 28px;
-  border-radius: 999px;
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45);
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+  &.btn-capture {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
 
-.btn-capture:hover {
-  transform: scale(1.04);
-  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.6);
-}
+    &:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.6);
+    }
 
-.btn-capture:active {
-  transform: scale(0.98);
+    &:active {
+      transform: scale(0.98);
+    }
+  }
 }
 
 .capture-icon {
@@ -563,12 +546,12 @@ body {
   cursor: pointer;
   font-size: 14px;
   color: var(--text-secondary);
-}
 
-.switch-label input {
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
+  input {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* --- Panel de Control Lateral --- */
@@ -583,6 +566,10 @@ body {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 20px;
+
+  &.help-card {
+    background: rgba(255, 255, 255, 0.02);
+  }
 }
 
 .card-title {
@@ -593,87 +580,6 @@ body {
   letter-spacing: -0.2px;
 }
 
-.buttons-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Selector de Marcos */
-.frame-selector-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.frame-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: left;
-}
-
-.frame-chip:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.frame-chip.active {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: var(--accent-color);
-  color: #a5b4fc;
-  box-shadow: 0 0 10px var(--accent-glow);
-}
-
-.chip-emoji {
-  font-size: 16px;
-}
-
-/* Selector de Filtros */
-.filters-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.filter-chip {
-  padding: 8px 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-
-.filter-chip:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-primary);
-}
-
-.filter-chip.active {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  color: white;
-}
-
-/* Tarjeta de Ayuda */
-.help-card {
-  background: rgba(255, 255, 255, 0.02);
-}
-
 .help-list {
   list-style: none;
   display: flex;
@@ -681,98 +587,8 @@ body {
   gap: 10px;
   font-size: 13px;
   color: var(--text-secondary);
-}
 
-.help-list strong {
-  color: var(--text-primary);
-}
-
-/* --- Modal de Captura --- */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  padding: 20px;
-}
-
-.modal-backdrop.open {
-  display: flex;
-}
-
-.modal-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  max-width: 580px;
-  width: 100%;
-  overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-  animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes modalIn {
-  0% { transform: scale(0.9); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.modal-header {
-  padding: 16px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.modal-header h3 {
-  font-size: 17px;
-  font-weight: 600;
-}
-
-.btn-close {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 24px;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.btn-close:hover {
-  color: var(--text-primary);
-}
-
-.modal-body {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  background: #090d14;
-}
-
-.preview-container {
-  max-width: 100%;
-  max-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#previewImage {
-  max-width: 100%;
-  max-height: 55vh;
-  border-radius: 6px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  object-fit: contain;
-}
-
-.modal-footer {
-  padding: 16px 20px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  border-top: 1px solid var(--border-color);
+  strong {
+    color: var(--text-primary);
+  }
 }

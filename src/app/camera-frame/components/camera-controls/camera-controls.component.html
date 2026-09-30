@@ -1,0 +1,13 @@
+<div class="control-card">
+  <h2 class="card-title">⚙️ Controles de Cámara</h2>
+  <div class="control-group buttons-grid">
+    <button class="btn btn-secondary" (click)="toggleCamera()">
+      <span>{{ isCameraOn ? '⏹️' : '📹' }}</span>
+      <span>{{ isCameraOn ? 'Apagar Cámara' : 'Encender Cámara' }}</span>
+    </button>
+    <button class="btn btn-secondary" (click)="toggleMirror()">
+      <span>🪞</span>
+      <span>{{ isMirrorOn ? 'Modo Espejo (On)' : 'Modo Espejo (Off)' }}</span>
+    </button>
+  </div>
+</div>
