@@ -1,14 +1,27 @@
 <div class="main">
-    @for (item of items; track item.image) {
+    <div *ngIf="loading" class="loading">
+        <p>Cargando productos...</p>
+    </div>
+
+    <div *ngIf="error" class="error">
+        <p>{{ error }}</p>
+    </div>
+
+    @for (product of products; track product.id) {
         <div class="card">
-            <img [src]="item.image" [alt]="item.text" class="card-img-top">
+            <img [src]="getImageUrl(product)" [alt]="product.nombre" class="card-img-top">
             <div class="card-body">
-                <p class="card-text">{{item.text}}</p>
+                <h5 class="card-title">{{ product.nombre }}</h5>
+                <p class="card-description">{{ product.descripcion }}</p>
+                <p class="card-price">${{ product.precio | number:'1.2-2' }}</p>
+                <button class="btn btn-add-cart" (click)="addToCart(product)">
+                    🛒 Agregar al Carrito
+                </button>
             </div>
         </div>
     } @empty {
         <div class="card">
-            <p class="card-text">No hay items para mostrar.</p>
+            <p class="card-text">No hay productos para mostrar.</p>
         </div>
     }
 </div>

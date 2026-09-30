@@ -7,7 +7,9 @@ import { NavigationService } from './shared/services/navigation.service';
 import { UtilsService } from './shared/services/utils.service';
 import { DataService } from './shared/services/data.service';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { CameraFrameModule } from './camera-frame/camera-frame.module';
+import { CartModule } from './cart/cart.module';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -20,7 +22,9 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     SharedModule,
     FormsModule,
+    HttpClientModule,
     CameraFrameModule,
+    CartModule,
   ],
   providers: [
     DataService,
