@@ -7,6 +7,7 @@ import { FrameType } from '../../enums/frame-type.enum';
 import { FilterType } from '../../enums/filter-type.enum';
 import { Subscription } from 'rxjs';
 import { FavoritesService } from '../../../shared/services/favorites.service';
+import { Menu } from 'src/app/shared/enums/menu.enum';
 
 @Component({
   selector: 'app-camera-frame',
@@ -16,6 +17,7 @@ import { FavoritesService } from '../../../shared/services/favorites.service';
 })
 export class CameraFrameComponent implements AfterViewInit, OnDestroy {
   @ViewChild('videoElement', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
+  menu = Menu;
   
   isCameraOn = false;
   isMirrorOn = true;

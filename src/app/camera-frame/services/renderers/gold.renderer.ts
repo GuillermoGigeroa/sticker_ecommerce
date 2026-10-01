@@ -52,7 +52,7 @@ export class GoldRenderer implements FrameRenderer {
     ctx.fillStyle = '#3a2605';
     ctx.textAlign = 'center';
     ctx.letterSpacing = '3px';
-    ctx.fillText('RETRATO VIVO', width / 2, plaqueY + 22);
+    ctx.fillText('RETRATO', width / 2, plaqueY + 22);
 
     ctx.font = 'italic 12px "Playfair Display", serif';
     ctx.fillStyle = '#52380a';
