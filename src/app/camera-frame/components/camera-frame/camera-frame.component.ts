@@ -6,6 +6,7 @@ import { CaptureService } from '../../services/capture.service';
 import { FrameType } from '../../enums/frame-type.enum';
 import { FilterType } from '../../enums/filter-type.enum';
 import { Subscription } from 'rxjs';
+import { FavoritesService } from '../../../shared/services/favorites.service';
 
 @Component({
   selector: 'app-camera-frame',
@@ -32,14 +33,16 @@ export class CameraFrameComponent implements AfterViewInit, OnDestroy {
   isFlashActive = false;
   showPhotoModal = false;
   capturedPhotoUrl = '';
-  
+  currentPhotoId = '';
+
   private subscriptions: Subscription[] = [];
 
   constructor(
     private cameraService: CameraService,
     private frameService: FrameService,
     private filterService: FilterService,
-    private captureService: CaptureService
+    private captureService: CaptureService,
+    private favoritesService: FavoritesService
   ) {
     this.updateDateDisplay();
   }
@@ -123,6 +126,7 @@ export class CameraFrameComponent implements AfterViewInit, OnDestroy {
       this.captionDate
     ).subscribe(dataUrl => {
       this.capturedPhotoUrl = dataUrl;
+      this.currentPhotoId = `photo-${Date.now()}`;
       this.showPhotoModal = true;
     });
   }
@@ -153,5 +157,22 @@ export class CameraFrameComponent implements AfterViewInit, OnDestroy {
 
   showNeonFooter(): boolean {
     return this.currentFrame === FrameType.NEON;
+  }
+
+  togglePhotoFavorite(): void {
+    if (!this.capturedPhotoUrl || !this.currentPhotoId) return;
+
+    this.favoritesService.toggleFavorite({
+      id: this.currentPhotoId,
+      type: 'photo',
+      image: this.capturedPhotoUrl,
+      caption: this.polaroidCaption,
+      date: this.captionDate,
+      timestamp: Date.now()
+    });
+  }
+
+  isPhotoFavorite(): boolean {
+    return this.currentPhotoId ? this.favoritesService.isFavorite(this.currentPhotoId) : false;
   }
 }

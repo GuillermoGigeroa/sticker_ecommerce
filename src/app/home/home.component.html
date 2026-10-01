@@ -1,27 +1,17 @@
 <div class="main">
-    <div *ngIf="loading" class="loading">
-        <p>Cargando productos...</p>
-    </div>
-
-    <div *ngIf="error" class="error">
-        <p>{{ error }}</p>
-    </div>
-
-    @for (product of products; track product.id) {
+    @for (item of items; track item.image) {
         <div class="card">
-            <img [src]="getImageUrl(product)" [alt]="product.nombre" class="card-img-top">
+            <img [src]="item.image" [alt]="item.text" class="card-img-top">
+            <button class="btn-favorite" (click)="toggleFavorite(item)" [class.active]="isFavorite(item)" title="Favorito">
+                <i class="bi" [class.bi-heart]="!isFavorite(item)" [class.bi-heart-fill]="isFavorite(item)"></i>
+            </button>
             <div class="card-body">
-                <h5 class="card-title">{{ product.nombre }}</h5>
-                <p class="card-description">{{ product.descripcion }}</p>
-                <p class="card-price">${{ product.precio | number:'1.2-2' }}</p>
-                <button class="btn btn-add-cart" (click)="addToCart(product)">
-                    🛒 Agregar al Carrito
-                </button>
+                <p class="card-text">{{item.text}}</p>
             </div>
         </div>
     } @empty {
         <div class="card">
-            <p class="card-text">No hay productos para mostrar.</p>
+            <p class="card-text">No hay items para mostrar.</p>
         </div>
     }
 </div>

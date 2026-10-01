@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../cart/models/product.model';
-import { ProductService } from '../cart/services/product.service';
-import { CartService } from '../cart/services/cart.service';
-import { AppComponent } from '../app.component';
+import { Component } from '@angular/core';
+import { FavoritesService } from '../shared/services/favorites.service';
+
+class Item {
+    image: string;
+    text: string;
+    constructor(image: string, text: string) {
+        this.image = image;
+        this.text = text;
+    }
+}
 
 @Component({
     selector: 'app-home',
@@ -10,77 +16,38 @@ import { AppComponent } from '../app.component';
     styleUrls: ['./home.component.scss'],
     standalone: false
 })
-export class HomeComponent implements OnInit {
-    products: Product[] = [];
-    loading = true;
-    error: string | null = null;
-
-    constructor(
-        private productService: ProductService,
-        private cartService: CartService,
-        private appComponent: AppComponent
-    ) {}
-
-    ngOnInit(): void {
-        this.loadProducts();
+export class HomeComponent {
+    items: Array<Item> = new Array<Item>();
+    constructor(private favoritesService: FavoritesService) {
+        this.generateObjects();
     }
 
-    private loadProducts(): void {
-        this.productService.getProducts().subscribe({
-            next: (products) => {
-                this.products = products;
-                this.loading = false;
-            },
-            error: (err) => {
-                console.error('Error loading products:', err);
-                this.error = 'Error al cargar productos. Usando datos de ejemplo.';
-                this.loading = false;
-                this.loadFallbackProducts();
-            }
+    private generateObjects() {
+        this.items.push(new Item('assets/images/1.png', 'Sticker 1'));
+        this.items.push(new Item('assets/images/2.png', 'Sticker 2'));
+        this.items.push(new Item('assets/images/3.png', 'Sticker 3'));
+        this.items.push(new Item('assets/images/4.png', 'Sticker 4'));
+        this.items.push(new Item('assets/images/5.png', 'Sticker 5'));
+        this.items.push(new Item('assets/images/6.png', 'Sticker 6'));
+        this.items.push(new Item('assets/images/7.png', 'Sticker 7'));
+    }
+
+    toggleFavorite(item: Item): void {
+        const id = this.getItemId(item);
+        this.favoritesService.toggleFavorite({
+            id,
+            type: 'sticker',
+            image: item.image,
+            text: item.text,
+            timestamp: Date.now()
         });
     }
 
-    private loadFallbackProducts(): void {
-        this.products = [
-            {
-                id: 1,
-                nombre: 'Sticker Gato',
-                descripcion: 'Sticker adorable de gato',
-                precio: 5.99,
-                imagenBase64: '',
-                stock: 100,
-                categoria: 'Animales',
-                activo: true
-            },
-            {
-                id: 2,
-                nombre: 'Sticker Flor',
-                descripcion: 'Sticker de flor colorida',
-                precio: 4.99,
-                imagenBase64: '',
-                stock: 50,
-                categoria: 'Naturaleza',
-                activo: true
-            }
-        ];
+    isFavorite(item: Item): boolean {
+        return this.favoritesService.isFavorite(this.getItemId(item));
     }
 
-    addToCart(product: Product): void {
-        this.cartService.addToCart(product.id, 1).subscribe({
-            next: () => {
-                this.appComponent.triggerConfetti();
-            },
-            error: (err) => {
-                console.error('Error adding to cart:', err);
-                alert('Error al agregar al carrito');
-            }
-        });
-    }
-
-    getImageUrl(product: Product): string {
-        if (product.imagenBase64) {
-            return 'data:image/png;base64,' + product.imagenBase64;
-        }
-        return 'assets/images/1.png';
+    private getItemId(item: Item): string {
+        return `sticker-${item.image.replace(/[^a-zA-Z0-9]/g, '-')}`;
     }
 }
