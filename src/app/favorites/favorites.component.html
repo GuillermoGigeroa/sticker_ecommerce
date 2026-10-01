@@ -1,0 +1,47 @@
+<div class="favorites-container">
+  <h1 class="page-title">Mis Favoritos</h1>
+
+  <div class="filter-buttons">
+    <button class="btn btn-outline-primary me-2" [class.active]="filter === 'all'" (click)="setFilter('all')">
+      Todos ({{itemCount}})
+    </button>
+    <button class="btn btn-outline-primary me-2" [class.active]="filter === 'sticker'" (click)="setFilter('sticker')">
+      Stickers ({{stickerCount}})
+    </button>
+    <button class="btn btn-outline-primary" [class.active]="filter === 'photo'" (click)="setFilter('photo')">
+      Fotos ({{photoCount}})
+    </button>
+  </div>
+
+  @if (favorites.length === 0) {
+    <div class="empty-state">
+      <i class="bi bi-heart"></i>
+      <p>No tienes favoritos aún.</p>
+      <a routerLink="/" class="btn btn-primary">Explorar stickers</a>
+      <a routerLink="/camera-frame" class="btn btn-secondary ms-2">Tomar fotos</a>
+    </div>
+  } @else {
+    <div class="favorites-grid">
+      @for (item of favorites; track item.id) {
+        <div class="favorite-card">
+          <div class="card-image-container">
+            <img [src]="item.image" [alt]="item.text || item.caption || 'Favorito'" class="card-img-top">
+            <button class="btn-remove-favorite" (click)="removeFavorite(item.id)" title="Eliminar de favoritos">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            @if (item.type === 'sticker') {
+              <p class="card-text">{{item.text}}</p>
+            } @else {
+              <p class="card-text">{{item.caption || 'Foto'}}</p>
+              @if (item.date) {
+                <small class="text-muted">{{item.date}}</small>
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

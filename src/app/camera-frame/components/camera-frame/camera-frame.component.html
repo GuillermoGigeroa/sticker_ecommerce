@@ -118,9 +118,11 @@
   </main>
 
   <!-- Modal de Resultado / Foto Capturada -->
-  <app-photo-modal 
-    [isOpen]="showPhotoModal" 
+  <app-photo-modal
+    [isOpen]="showPhotoModal"
     [photoDataUrl]="capturedPhotoUrl"
-    (close)="closePhotoModal()">
+    [isFavorite]="isPhotoFavorite()"
+    (close)="closePhotoModal()"
+    (favorite)="togglePhotoFavorite()">
   </app-photo-modal>
 </div>

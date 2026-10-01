@@ -2,6 +2,9 @@
     @for (item of items; track item.image) {
         <div class="card">
             <img [src]="item.image" [alt]="item.text" class="card-img-top">
+            <button class="btn-favorite" (click)="toggleFavorite(item)" [class.active]="isFavorite(item)" title="Favorito">
+                <i class="bi" [class.bi-heart]="!isFavorite(item)" [class.bi-heart-fill]="isFavorite(item)"></i>
+            </button>
             <div class="card-body">
                 <p class="card-text">{{item.text}}</p>
             </div>

@@ -9,11 +9,13 @@ import { DataService } from './shared/services/data.service';
 import { FormsModule } from '@angular/forms';
 import { CameraFrameModule } from './camera-frame/camera-frame.module';
 import { HomeComponent } from './home/home.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,
